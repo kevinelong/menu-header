@@ -1,15 +1,42 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+class Menu{
+    String pattern;
+    int width;
+    int padding;
+    String SPACE = " ";
+    Menu(String pattern, int width, int padding){
+        this.pattern = pattern;
+        this.width = width;
+        this.padding = padding;
+    }
+    public String repeat(String s, int times){
+        String output = "";
+        while(output.length() < times){
+            output = output + s;
+        }
+        return output;
+    }
+    public int getCenter(){
+        return (int) Math.ceil(this.width / 2.0);
+    }
+    public void header(String message){
+        String pad = repeat(pattern, padding);
+        String spacing = repeat(SPACE, getCenter() - (message.length() / 2) - (pad.length() * 2));
+        System.out.printf("%s\n", repeat(pattern, width));
+        System.out.printf("%s%s%s%s%s\n",
+                pad,
+                spacing,
+                message,
+                spacing,
+                pad);
+        System.out.printf("%s\n", repeat(pattern, width));
+    }
+}
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Menu m = new Menu("=-.-=", 40, 1);
+        m.header("Main");
+        System.out.println("");
+        System.out.println("");
+        m.header("The Full Ledger Menu");
     }
 }
