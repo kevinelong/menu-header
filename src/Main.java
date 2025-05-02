@@ -1,42 +1,60 @@
-class Menu{
+class Menu {
     String pattern;
     int width;
     int padding;
     String SPACE = " ";
-    Menu(String pattern, int width, int padding){
+
+    Menu(String pattern, int width, int padding) {
         this.pattern = pattern;
         this.width = width;
         this.padding = padding;
     }
-    public String repeat(String s, int times){
-        String output = "";
-        while(output.length() < times){
-            output = output + s;
+
+    public String repeat(String s, int times) {
+        StringBuilder output = new StringBuilder();
+
+        while (output.length() < times) {
+            output.append(s);
         }
-        return output;
+        return output.toString();
     }
-    public int getCenter(){
-        return (int) Math.ceil(this.width / 2.0);
+
+    public int getCenter() {
+        return (int) Math.floor(this.width / 2.0);
     }
-    public void header(String message){
+
+    public void header(String message) {
         String pad = repeat(pattern, padding);
-        String spacing = repeat(SPACE, getCenter() - (message.length() / 2) - (pad.length() * 2));
+        int hm = (int) Math.ceil(message.length() / 2.0);
+        String spacing = repeat(SPACE, getCenter() - hm - pad.length());
+        String spacing2 = spacing;
+        if (width > pad.length() + spacing2.length() + message.length() + spacing2.length() + pad.length()) {
+            spacing2 += SPACE;
+        }
         System.out.printf("%s\n", repeat(pattern, width));
+
         System.out.printf("%s%s%s%s%s\n",
                 pad,
                 spacing,
                 message,
-                spacing,
+                spacing2,
                 pad);
+
         System.out.printf("%s\n", repeat(pattern, width));
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        Menu m = new Menu("=-.-=", 40, 1);
-        m.header("Main");
-        System.out.println("");
-        System.out.println("");
+        Menu m = new Menu("#", 40, 6);
+        m.header("Home Menu");
+        System.out.println();
+        System.out.println();
         m.header("The Full Ledger Menu");
     }
 }
+/*
+========================================
+=        The Full Ledger Menu        =
+========================================
+ */
